@@ -90,11 +90,13 @@ void Chip8::clearScreen()
 	_isRedraw = true;
 }
 
-void Chip8::loadRom(const std::string fileName)
+bool Chip8::loadRom(const std::string fileName)
 {
 	initialize();
-
 	std::ifstream fileIn (fileName, std::ifstream::binary);
+
+	if (!fileIn.is_open())
+		return false;
 
 	if(fileIn) 
 	{
@@ -121,6 +123,8 @@ void Chip8::loadRom(const std::string fileName)
 		for(unsigned j=0; j<length; ++j) std::cout << std::hex << (int)_memory[j + PROGRAM_START] << ", ";
 #endif	
 	}
+
+	return true;
 }
 
 void Chip8::runCycle()

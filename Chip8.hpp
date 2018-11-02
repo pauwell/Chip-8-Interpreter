@@ -93,7 +93,7 @@ public:
 	Chip8();
 	
 	void initialize();
-	void loadRom(const std::string fileName);
+	bool loadRom(const std::string fileName);
 	void runCycle();
 
 	const bool isRedraw();

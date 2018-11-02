@@ -36,8 +36,15 @@ int main()
 {
 	// Create interpreter.
 	Chip8 chip8;
-	chip8.initialize();
-	chip8.loadRom("Roms/TETRIS");
+	//chip8.loadRom("Roms/TETRIS");
+	
+	// Select a ROM and load it.
+	std::string path{""};
+	do 
+	{
+		std::cout << "Path to chip-8 ROM: ";
+		std::cin >> path;
+	} while (!chip8.loadRom(path));
 
 	// Create window.
 	sf::RenderWindow window(sf::VideoMode(768, 384, 32), "pauwell's chip-8 interpreter", sf::Style::Close);
@@ -69,6 +76,7 @@ int main()
 			else if(event.key.code == sf::Keyboard::Num4) chip8.setKey(0xC, (event.type==sf::Event::KeyPressed));
 			else if(event.key.code == sf::Keyboard::R) chip8.setKey(0xD, (event.type==sf::Event::KeyPressed));
 			else if(event.key.code == sf::Keyboard::F) chip8.setKey(0xE, (event.type==sf::Event::KeyPressed));
+			else if (event.key.code == sf::Keyboard::Escape) window.close();
 			if(event.type == sf::Event::Closed) window.close();
 		}
 
