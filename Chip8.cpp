@@ -1,3 +1,27 @@
+/*
+*	MIT License
+*
+*	Copyright(c) 2018 Paul Bernitz
+*
+*	Permission is hereby granted, free of charge, to any person obtaining a copy
+*	of this software and associated documentation files(the "Software"), to deal
+*	in the Software without restriction, including without limitation the rights
+*	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+*	copies of the Software, and to permit persons to whom the Software is
+*	furnished to do so, subject to the following conditions :
+*
+*	The above copyright notice and this permission notice shall be included in all
+*	copies or substantial portions of the Software.
+*
+*	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+*	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+*	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+*	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+*	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+*	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+*	SOFTWARE.
+*/
+
 #include "Chip8.hpp"
 #include "Chip8Debugger.hpp"
 
@@ -107,16 +131,16 @@ void Chip8::runCycle()
 
 void Chip8::updateTimers()
 {
-	// This timer does nothing more than subtract 1 from the value of DT at a rate of 60Hz. When DT reaches 0, it deactivates.
+	// Subtract 1 from the value of DT at a rate of 60Hz. When DT reaches 0, it deactivates.
 	_delayTimer -= (_delayTimer > 0 ? 1 : 0); 
 
-	// This timer also decrements at a rate of 60Hz, however, as long as ST's value is greater than zero, the Chip-8 buzzer will sound. When ST reaches zero, the sound timer deactivates.
+	// Decrements at a rate of 60Hz, however, as long as ST's value is greater than zero, the Chip-8 buzzer will sound. When ST reaches zero, the sound timer deactivates.
 	if(_soundTimer > 0)
 	{
 		// TODO: buzzer-sound here.
 	}
+
 	_soundTimer -= (_soundTimer > 0 ? 1 : 0);
-	
 }
 
 void Chip8::executeInstruction()
@@ -159,7 +183,7 @@ void Chip8::executeInstruction()
 	case 0x1000: // Jump to location nnn.
 		_pc = nnn;		
 #ifdef ALTERNATIVE_REDRAW
-		_isRedraw = true; // Moved here from DXYN (Draw) to prevent some sprites from 'blinking'.	
+		_isRedraw = true; // Moved here from DXYN (Draw) to prevent sprites in some ROMs from flickering.	
 #endif
 		break;
 	case 0x2000: // Call subroutine at nnn.
