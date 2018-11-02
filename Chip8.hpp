@@ -75,16 +75,16 @@ const u8 FONTSET[FONTSET_SIZE] =
 
 class Chip8 : public sf::Drawable, public sf::Transformable
 {
-	u8	_memory[MEMORY_SIZE]; 
-	u8	_v[V_REGS_TOTAL];
+	u8  _memory[MEMORY_SIZE]; 
+	u8  _v[V_REGS_TOTAL];
 	u16 _i;
-	u8	_delayTimer;
-	u8	_soundTimer;
+	u8  _delayTimer;
+	u8  _soundTimer;
 	u16 _pc;
-	u8	_sp;
-	u16	_stack[STACK_SIZE];
-	u8 _keypad[KEYPAD_SIZE];
-	u8 _display[DISPLAY_W * DISPLAY_H];
+	u8  _sp;
+	u16 _stack[STACK_SIZE];
+	u8  _keypad[KEYPAD_SIZE];
+	u8  _display[DISPLAY_W * DISPLAY_H];
 
 	std::array<sf::RectangleShape, (DISPLAY_W * DISPLAY_H)> _pixels;
 	bool _isRedraw;
